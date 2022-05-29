@@ -71,7 +71,6 @@ function confirmaSala1(){
         }  
 }
 
-
 function confirmaSala2(){
         //Pegando os valores do input e colocando em variáveis
         let professor = document.getElementById("professor2")
@@ -204,8 +203,6 @@ function confirmaSala3(){
     }  
 }
 
-
-
 function confirmaSala4(){
     //Pegando os valores do input e colocando em variáveis
     let professor = document.getElementById("professor4")
@@ -278,8 +275,7 @@ function confirmaSala4(){
         let linhas = tbody.children
         tbody.remove(linhas)
     }
-             */
-
+ */
 //Abre o Modal da Sala
 function entraSala1(){
     let container = document.getElementById("container-sala1")

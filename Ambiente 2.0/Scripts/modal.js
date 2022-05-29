@@ -1,7 +1,6 @@
 //Setando o Body em uma variável
 let body = document.getElementById("body");
 let check = [];
-let x = 0;
 
 //Criando os Elementos do Modal
 let divContainer = document.createElement("div");
@@ -49,13 +48,13 @@ buttonX.onclick = function(){
     divContainer.style="display:none;"
 }
 
-    //Elementos Específicos de Cada Sala
-    let tbody = document.createElement("tbody")
-    let br = document.createElement("br")
-    let inputProfessor = document.createElement("input")
-    let inputData = document.createElement("input")
-    let submit = document.createElement("input")
-    let inputHora = document.createElement("input")
+//Elementos Específicos de Cada Sala
+let tbody = document.createElement("tbody")
+let br = document.createElement("br")
+let inputProfessor = document.createElement("input")
+let inputData = document.createElement("input")
+let submit = document.createElement("input")
+let inputHora = document.createElement("input")
 
     
 
@@ -99,10 +98,9 @@ function cria(id){
     divForm.appendChild(submit)
 
     submit.setAttribute("onclick", `confirmaSala(${id})`)
+     
 
 }
-
-
 
 function confirmaSala(id){
     //Pegando os valores do input e colocando em variáveis
@@ -136,6 +134,7 @@ function confirmaSala(id){
 
     if(y == 1){
         //Adicionando o texto da data e hora.
+            tdTwo.innerHTML += ` LAB${id}`
             tdThree.innerHTML = String(data.value);
             tdFour.innerHTML = String(hora.value);
         //Colocando o valor da data e hora na array check2
@@ -168,3 +167,5 @@ function confirmaSala(id){
         
     }  
     }
+
+   
