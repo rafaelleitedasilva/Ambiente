@@ -15,6 +15,10 @@ main{
     padding: 10px;
 }
 
+label{
+    margin: 5px;
+}
+
 input#professor{
     margin: auto;
     text-align: center;
@@ -131,8 +135,8 @@ div.form{
     height: 20%;
 }
 
-.btn.btn-success, input#hora, input#data, input#professor, label, .btn.btn-outline-danger{
-    margin-top: 3px;
+.btn.btn-success, input{
+    margin: 3px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 17px;
 }
