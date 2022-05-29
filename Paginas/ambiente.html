@@ -34,11 +34,23 @@
         <h1 class="main">Registro de Ambiente</h1>
         <h6> Selecione a sala que você quer reservar</h2>
         <div class="salas">
-            <div id="sala1" onclick="entraSala1()" class="livre"><P ><p class="sala">LAB01</P></div>
-            <div id="sala2" onclick="entraSala2()" class="livre"><P class="sala">LAB02</P></div>
-            <!-- <br>
-            <div id="sala3" onclick="sala3()" class="livre"><P id="lab3">LAB03</P></div>
-            <div id="sala4" onclick="sala4()" class="livre"><P id="lab4">LAB04</P></div> -->
+
+            <div id="sala1" onclick="entraSala1()" class="livre">
+                <p class="sala">LAB01</p>
+            </div>
+
+            <div id="sala2" onclick="entraSala2()" class="livre">
+                <P class="sala">LAB02</p>
+            </div>
+
+            <div id="sala3" onclick="entraSala3()" class="livre">
+                <p class="sala">LAB03</p>
+            </div>
+            
+            <div id="sala4" onclick="entraSala4()" class="livre">
+                <P class="sala">LAB04</P>
+            </div>
+
         </div>
     </main>
 
@@ -119,7 +131,83 @@
             
         </div>
     </div>
+
+    <!-- SALA 3 -->
+    <div class="container-sala1" id="container-sala3">
+        <div class="modal-sala1">
+            <div class="registros">
+                <h1></h1>
+                    <table class="table" id="registros">
+                        <thead>
+                          <tr>
+                            <th scope="col">Professor</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Horário</th>
+                            <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody3">
+                          <tr>
     
+                          </tr>
+                        </tbody>
+                </table>
+            </div>
+            <div class="form">
+                <label>Professor:</label>
+                <input type="text" id="professor3" required>
+                
+                <label>Data:</label>
+                <input type="date" id="data3" required>
+                <br>
+                <label>Horário:</label>
+                <input type="time" id="hora3" required>
+                
+                <input type="submit" class="btn btn-success" onclick="confirmaSala3()" value="Confirmar">
+            </div>
+            <button class="btn btn-danger-modal" onclick="sairSala3()"> X </button>  
+            
+        </div>
+    </div>
+
+    <!-- SALA 4 -->
+    <div class="container-sala1" id="container-sala4">
+        <div class="modal-sala1">
+            <div class="registros">
+                <h1></h1>
+                    <table class="table" id="registros">
+                        <thead>
+                          <tr>
+                            <th scope="col">Professor</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Horário</th>
+                            <th scope="col">Delete</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tbody4">
+                          <tr>
+    
+                          </tr>
+                        </tbody>
+                </table>
+            </div>
+            <div class="form">
+                <label>Professor:</label>
+                <input type="text" id="professor4" required>
+                
+                <label>Data:</label>
+                <input type="date" id="data4" required>
+                <br>
+                <label>Horário:</label>
+                <input type="time" id="hora4" required>
+                
+                <input type="submit" class="btn btn-success" onclick="confirmaSala4()" value="Confirmar">
+            </div>
+            <button class="btn btn-danger-modal" onclick="sairSala4()"> X </button>  
+            
+        </div>
+    </div>
+
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -131,6 +219,7 @@
     <script src="../Scripts/ambiente.js"></script>
 
     <script>
+        //Fecha o Modal da Sala
         function sairSala1(){
             let container = document.getElementById("container-sala1")
             container.style="display:none;"
@@ -141,6 +230,20 @@
             container.style="display:none;"
         }
 
+        function sairSala3(){
+            let container = document.getElementById("container-sala3")
+            container.style="display:none;"
+        }
+
+        function sairSala4(){
+            let container = document.getElementById("container-sala4")
+            container.style="display:none;"
+        }
+
+
+        //Abre o Modal da Sala
+
+
         function entraSala1(){
             let container = document.getElementById("container-sala1")
             container.style="display:flex;"
@@ -148,6 +251,16 @@
 
         function entraSala2(){
             let container = document.getElementById("container-sala2")
+            container.style="display:flex;"
+        }
+
+        function entraSala3(){
+            let container = document.getElementById("container-sala3")
+            container.style="display:flex;"
+        }
+
+        function entraSala4(){
+            let container = document.getElementById("container-sala4")
             container.style="display:flex;"
         }
     </script>
