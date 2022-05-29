@@ -280,7 +280,44 @@ function confirmaSala4(){
     }
              */
 
+//Abre o Modal da Sala
+function entraSala1(){
+    let container = document.getElementById("container-sala1")
+    container.style="display:flex;"
+}
 
+function entraSala2(){
+    let container = document.getElementById("container-sala2")
+    container.style="display:flex;"
+}
 
-         
+function entraSala3(){
+    let container = document.getElementById("container-sala3")
+    container.style="display:flex;"
+}
 
+function entraSala4(){
+    let container = document.getElementById("container-sala4")
+    container.style="display:flex;"
+}
+
+//Fecha o Modal da Sala
+function sairSala1(){
+    let container = document.getElementById("container-sala1")
+    container.style="display:none;"
+}
+
+function sairSala2(){
+    let container = document.getElementById("container-sala2")
+    container.style="display:none;"
+}
+
+function sairSala3(){
+    let container = document.getElementById("container-sala3")
+    container.style="display:none;"
+}
+
+function sairSala4(){
+    let container = document.getElementById("container-sala4")
+    container.style="display:none;"
+}
