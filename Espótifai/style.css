@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+    font-family: 'Poppins';
+}
+
+.navbar.navbar-expand-lg{
+    background-color: rgb(18, 18, 20);
+}
+
+.navbar.navbar-expand-lg a{
+    color: rgb(90, 185, 90) !important;
+}
+
+.navbar.navbar-expand-lg a:hover{
+    color: rgba(0, 128, 0, 0.712) !important;
+}
