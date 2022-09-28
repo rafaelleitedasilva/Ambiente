@@ -11,6 +11,7 @@ let divForm = document.createElement("div");
 let labelProfessor = document.createElement("label")
 let labelData = document.createElement("label")
 let labelHora = document.createElement("label")
+let labelPeriodo = document.createElement("label")
 let buttonX = document.createElement("button")
 
 //Elementos do Cabeçalho da Tabela
@@ -20,6 +21,7 @@ let thProfessor = document.createElement("th");
 let thData = document.createElement("th");
 let thHora = document.createElement("th");
 let thDelete = document.createElement("th");
+let thPeriodo = document.createElement("th");
 
 //Setando as classes
 divContainer.className="container-sala";
@@ -28,7 +30,7 @@ divRegistros.className="registros";
 tabela.className="table";
 tabela.id="registros";
 buttonX.className="btn btn-danger-modal"
-thProfessor.scope,thData.scope,thHora.scope,thDelete.scope = "col";
+thProfessor.scope,thData.scope,thHora.scope,thDelete.scope,thPeriodo.scope = "col";
 divForm.className="form"
 
 //Valores
@@ -36,10 +38,12 @@ thProfessor.innerText="Professor";
 thData.innerText="Data"
 thHora.innerText="Horário"
 thDelete.innerText="Apagar"
+thPeriodo.innerText="Periodo"
 buttonX.innerText="X"
 labelProfessor.innerText="Professor:"
 labelData.innerText="Data:"
 labelHora.innerText="Horário"
+labelPeriodo.innerText="Periodo:"
 
 
 
@@ -55,6 +59,7 @@ let inputProfessor = document.createElement("input")
 let inputData = document.createElement("input")
 let submit = document.createElement("input")
 let inputHora = document.createElement("input")
+let inputPeriodo = document.createElement("input")
 
     
 
@@ -66,6 +71,10 @@ function cria(id){
     inputData.type="date"
     inputHora.type="time"
     submit.type="submit"
+    inputPeriodo.type="number"
+    inputPeriodo.value = 4
+    inputPeriodo.style = "width:35px;"
+    inputPeriodo.min = 2
     submit.value="Confirmar"
     submit.className="btn btn-success"
     tbody.id = `tbody${id}`;
@@ -73,6 +82,7 @@ function cria(id){
     inputProfessor.id=`professor${id}`
     inputData.id=`data${id}`
     inputHora.id=`hora${id}`
+    inputPeriodo.id=`periodo${id}`
     
     //Criando o Model proceduralmente
     body.appendChild(divContainer);
@@ -84,6 +94,7 @@ function cria(id){
     trThead.appendChild(thProfessor)
     trThead.appendChild(thData)
     trThead.appendChild(thHora)
+    trThead.appendChild(thPeriodo)
     trThead.appendChild(thDelete)
     divModal.appendChild(divForm)
     divModal.appendChild(buttonX)
@@ -95,6 +106,8 @@ function cria(id){
     divForm.appendChild(br)
     divForm.appendChild(labelHora)
     divForm.appendChild(inputHora)
+    divForm.appendChild(labelPeriodo)
+    divForm.appendChild(inputPeriodo)
     divForm.appendChild(submit)
 
     submit.setAttribute("onclick", `confirmaSala(${id})`)
@@ -107,6 +120,7 @@ function confirmaSala(id){
     let professor = document.getElementById(`professor${id}`)
     let data = document.getElementById(`data${id}`)
     let hora = document.getElementById(`hora${id}`) 
+    let periodo = document.getElementById(`periodo${id}`)
 
     let tr = document.createElement('tr')
     let cancela = document.createElement('button')
@@ -118,13 +132,14 @@ function confirmaSala(id){
     tdTwo.innerHTML = String(professor.value);
     let tdThree = document.createElement('td')
     let tdFour = document.createElement('td')
+    let tdFive = document.createElement('td')
 
     //Variável que vai garantir a atualização dos dados
     let y = 1;
 
     //Checando se o horário e data escolhidos já foram selecionados por outro professor
     for(let i = 0; i<check.length; i++){
-        if(check[i] == `${data.value}${hora.value}`){
+        if(check[i] == `${data.value},${tdTwo.textContent},${hora.value},${periodo.value}`){
             window.alert("Essa data e hora já foram escolhidas por outro professor!");
             y = 0;
         }
@@ -137,35 +152,36 @@ function confirmaSala(id){
             tdTwo.innerHTML += ` LAB${id}`
             tdThree.innerHTML = String(data.value);
             tdFour.innerHTML = String(hora.value);
+            tdFive.innerHTML = String(periodo.value);
         //Colocando o valor da data e hora na array check2
-            check.push(`${data.value}${hora.value}`);
+            check.push(`${data.value},${tdTwo.textContent},${hora.value},${periodo.value}`);
             console.log(check)
         //Adicionando tudo visualmente para o usuário
             tbody.appendChild(tr)
             tr.appendChild(tdTwo)
             tr.appendChild(tdThree)
             tr.appendChild(tdFour)
+            tr.appendChild(tdFive)
             tr.appendChild(tdOne)
+            
     }
 
     cancela.innerText = "X"
 
     //Atrelando uma função no botão Cancela para que ele apague o elemento visualmente e na array
-    cancela.onclick = function(){
+    cancela.onclick = () => {
 
         //Pega a tr mais próxima do botão de apagar
         let linha = cancela.closest("tr");
 
         //Cria um for que checa todos os elementos da array e quando encontra o valor que deseja apaga ele, junto com a linha
         for (let i = 0; i < check.length; i++){
-            if(check[i] == `${linha.childNodes[1].textContent}${linha.childNodes[2].textContent}`){
+            if(check[i] == `${linha.childNodes[1].textContent},${linha.childNodes[2].textContent},${linha.childNodes[3].textContent},${linha.childNodes[4].textContent}`){
                 check.splice(i,1)
-                cancela.closest("tr").remove();
+                linha.remove();
                 console.log(check)
             }
         }
         
     }  
     }
-
-   
