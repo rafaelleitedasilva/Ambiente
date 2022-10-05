@@ -126,7 +126,7 @@ function confirmaSala(id){
     let tdOne = document.createElement('td')
     tdOne.appendChild(cancela)
     let tdTwo = document.createElement('td')
-    tdTwo.innerHTML = String(professor.value);
+    tdTwo.innerHTML = `${String(professor.value)} LAB${id}`;
     let tdThree = document.createElement('td')
     let tdFour = document.createElement('td')
     let tdFive = document.createElement('td')
@@ -142,22 +142,24 @@ function confirmaSala(id){
     }else{
     for(let x = 0; x<check.length; x++){
         for(let i = parseInt(hora.value); i<parseInt(hora_final); i++){
-            if((check[x].split(",")[2].split("-")[0] <= hora.value && check[x].split(",")[2].split("-")[1] > hora.value) && check[x].split(",")[0] == data.value && check[x].split(",")[1] == tdTwo.textContent){
-                y = 0
-            }else{
+            if(parseInt(check[x].split(",")[2].split("-")[0]) > parseInt(hora.value) || parseInt(check[x].split(",")[2].split("-")[1]) <= parseInt(hora.value)){
                 y = 1
-                console.log("Sala")
-                console.log(check[x].split(",")[1])
-
-                console.log("Data")
-                console.log(check[x].split(",")[0])
+                console.log(tdTwo.textContent.split(' ')[1])
+            }else if(check[x].split(",")[0].replace(' ', '') != data.value || check[x].split(",")[1].split(' ')[1] != tdTwo.textContent.split(' ')[1]){
+                y = 1
+                console.log(tdTwo.textContent.split(' ')[1])
+            }else{
+                y = -1
+                break
             }
+        }
+        if(y == -1){
+            break
         }
     }
 }
     if(y == 1){
         //Adicionando o texto da data e hora.
-        tdTwo.innerHTML += ` LAB${id}`
         tdThree.innerHTML = String(data.value);
         tdFour.innerHTML = String(hora.value);
         tdFive.innerHTML = String(periodo.value) + " hora(s)";
@@ -171,6 +173,7 @@ function confirmaSala(id){
         tr.appendChild(tdFour)
         tr.appendChild(tdFive)
         tr.appendChild(tdOne)
+        y = 0
     }
     cancela.innerText = "X"
     //Atrelando uma função no botão Cancela para que ele apague o elemento visualmente e na array
