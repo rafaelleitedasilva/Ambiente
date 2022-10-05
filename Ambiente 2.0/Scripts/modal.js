@@ -69,7 +69,7 @@ function cria(id){
     //Inputs
     inputProfessor.type="text"
     inputData.type="date"
-    inputHora.type="time"
+    inputHora.type="number"
     submit.type="submit"
     inputPeriodo.type="number"
     inputPeriodo.value = 4
@@ -111,8 +111,6 @@ function cria(id){
     divForm.appendChild(submit)
 
     submit.setAttribute("onclick", `confirmaSala(${id})`)
-     
-
 }
 
 function confirmaSala(id){
@@ -121,7 +119,6 @@ function confirmaSala(id){
     let data = document.getElementById(`data${id}`)
     let hora = document.getElementById(`hora${id}`) 
     let periodo = document.getElementById(`periodo${id}`)
-
     let tr = document.createElement('tr')
     let cancela = document.createElement('button')
     cancela.className = "btn-danger"
@@ -135,45 +132,51 @@ function confirmaSala(id){
     let tdFive = document.createElement('td')
 
     //Variável que vai garantir a atualização dos dados
-    let y = 1;
+    let y = 0;
+
+    let hora_final = parseInt(hora.value) + parseInt(periodo.value)
 
     //Checando se o horário e data escolhidos já foram selecionados por outro professor
-    for(let i = 0; i<check.length; i++){
-        if(check[i] == `${data.value},${tdTwo.textContent},${hora.value},${periodo.value}`){
-            window.alert("Essa data e hora já foram escolhidas por outro professor!");
-            y = 0;
+    if(check.length == 0){
+        y = 1
+    }else{
+    for(let x = 0; x<check.length; x++){
+        for(let i = parseInt(hora.value); i<parseInt(hora_final); i++){
+            if((check[x].split(",")[2].split("-")[0] <= hora.value && check[x].split(",")[2].split("-")[1] > hora.value) && check[x].split(",")[0] == data.value && check[x].split(",")[1] == tdTwo.textContent){
+                y = 0
+            }else{
+                y = 1
+                console.log("Sala")
+                console.log(check[x].split(",")[1])
+
+                console.log("Data")
+                console.log(check[x].split(",")[0])
+            }
         }
     }
-
-    //Se o valor de y permanecer sendo 1, significa que seus valores não foram encontrados na array, ou seja, os valores podem ser adicionados
-
+}
     if(y == 1){
         //Adicionando o texto da data e hora.
-            tdTwo.innerHTML += ` LAB${id}`
-            tdThree.innerHTML = String(data.value);
-            tdFour.innerHTML = String(hora.value);
-            tdFive.innerHTML = String(periodo.value);
-        //Colocando o valor da data e hora na array check2
-            check.push(`${data.value},${tdTwo.textContent},${hora.value},${periodo.value}`);
-            console.log(check)
-        //Adicionando tudo visualmente para o usuário
-            tbody.appendChild(tr)
-            tr.appendChild(tdTwo)
-            tr.appendChild(tdThree)
-            tr.appendChild(tdFour)
-            tr.appendChild(tdFive)
-            tr.appendChild(tdOne)
-            
+        tdTwo.innerHTML += ` LAB${id}`
+        tdThree.innerHTML = String(data.value);
+        tdFour.innerHTML = String(hora.value);
+        tdFive.innerHTML = String(periodo.value) + " hora(s)";
+            //Colocando o valor da data e hora na array check2
+        check.push(`${data.value},${tdTwo.textContent},${hora.value}-${hora_final}`);
+        console.log(check)
+            //Adicionando tudo visualmente para o usuário
+        tbody.appendChild(tr)
+        tr.appendChild(tdTwo)
+        tr.appendChild(tdThree)
+        tr.appendChild(tdFour)
+        tr.appendChild(tdFive)
+        tr.appendChild(tdOne)
     }
-
     cancela.innerText = "X"
-
     //Atrelando uma função no botão Cancela para que ele apague o elemento visualmente e na array
     cancela.onclick = () => {
-
         //Pega a tr mais próxima do botão de apagar
         let linha = cancela.closest("tr");
-
         //Cria um for que checa todos os elementos da array e quando encontra o valor que deseja apaga ele, junto com a linha
         for (let i = 0; i < check.length; i++){
             if(check[i] == `${linha.childNodes[1].textContent},${linha.childNodes[2].textContent},${linha.childNodes[3].textContent},${linha.childNodes[4].textContent}`){
@@ -184,4 +187,4 @@ function confirmaSala(id){
         }
         
     }  
-    }
+}
