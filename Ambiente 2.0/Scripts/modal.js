@@ -70,11 +70,14 @@ function cria(id){
     inputProfessor.type="text"
     inputData.type="date"
     inputHora.type="number"
+    inputHora.min = 0
+    inputHora.max = 24
+    inputHora.style = "width:40px;"
     submit.type="submit"
     inputPeriodo.type="number"
-    inputPeriodo.value = 4
+    inputPeriodo.value = 1
     inputPeriodo.style = "width:35px;"
-    inputPeriodo.min = 2
+    inputPeriodo.min = 1
     submit.value="Confirmar"
     submit.className="btn btn-success"
     tbody.id = `tbody${id}`;
@@ -141,20 +144,20 @@ function confirmaSala(id){
         y = 1
     }else{
     for(let x = 0; x<check.length; x++){
+        if(y == -1){
+            break
+        }
         for(let i = parseInt(hora.value); i<parseInt(hora_final); i++){
             if(parseInt(check[x].split(",")[2].split("-")[0]) > parseInt(hora.value) || parseInt(check[x].split(",")[2].split("-")[1]) <= parseInt(hora.value)){
                 y = 1
                 console.log(tdTwo.textContent.split(' ')[1])
-            }else if(check[x].split(",")[0].replace(' ', '') != data.value || check[x].split(",")[1].split(' ')[1] != tdTwo.textContent.split(' ')[1]){
+            }else if(check[x].split(",")[0] != data.value || check[x].split(",")[1].split(' ')[1] != tdTwo.textContent.split(' ')[1]){
                 y = 1
                 console.log(tdTwo.textContent.split(' ')[1])
             }else{
                 y = -1
                 break
             }
-        }
-        if(y == -1){
-            break
         }
     }
 }
@@ -176,16 +179,17 @@ function confirmaSala(id){
         y = 0
     }
     cancela.innerText = "X"
+    
+    //ARRUMAR A IDENTIFICAÇÃO DA LINHA DENTRO DO ARRAY
     //Atrelando uma função no botão Cancela para que ele apague o elemento visualmente e na array
     cancela.onclick = () => {
         //Pega a tr mais próxima do botão de apagar
         let linha = cancela.closest("tr");
         //Cria um for que checa todos os elementos da array e quando encontra o valor que deseja apaga ele, junto com a linha
         for (let i = 0; i < check.length; i++){
-            if(check[i] == `${linha.childNodes[1].textContent},${linha.childNodes[2].textContent},${linha.childNodes[3].textContent},${linha.childNodes[4].textContent}`){
+            if(check[i] == `${linha.childNodes[1].textContent},${linha.childNodes[2].textContent},${linha.childNodes[3].textContent}-${linha.childNodes[4].textContent}`){
                 check.splice(i,1)
-                linha.remove();
-                console.log(check)
+                linha.remove()
             }
         }
         
